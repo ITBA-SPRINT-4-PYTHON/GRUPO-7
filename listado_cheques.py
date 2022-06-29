@@ -13,13 +13,21 @@ else:
 
 file=open(nombreArchivo,'r')
 
+nroCheque=''
+msjError=''
+
 lineas = csv.reader(file)
 
 for cheque in lineas:
     if cheque[8] ==  dni:
-        print("se encontro el cheque: ", cheque)
+        if nroCheque=='':
+            nroCheque=cheque[0]
+        else:
+            if cheque[0]==nroCheque:
+                msjError= 'El DNI:', dni, 'tiene dos cheques iguales con nro: ', nroCheque
+                break
     else:
-        print("no se encontro ningun cheque")
+        print("No se encontro ningun cheque")
 
 file.close()
 
