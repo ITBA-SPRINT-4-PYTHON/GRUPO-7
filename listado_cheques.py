@@ -1,10 +1,20 @@
 import csv
 import sys
+import datetime
 
 
 def imprimir():
     for x in devolucion:
         print(x)
+        
+def returnCsv():
+    tiempo = datetime.timestamp(datetime.now())
+    fileName = dni + tiempo + '.csv'
+    with open(fileName, 'a') as f:
+        write = csv.writer(f)
+        write.writerows(devolucion)
+    
+    f.close()
 
 
 argumentos = sys.argv
@@ -47,7 +57,7 @@ if msjError == '':
     if salida.lower() == 'pantalla':
         imprimir()
     elif salida.lower() == 'csv':
-        print('simulamos devolver un csv')
+        returnCsv()
 else:
     print(msjError)
 
