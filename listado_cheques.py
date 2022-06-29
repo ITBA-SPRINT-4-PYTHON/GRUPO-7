@@ -13,4 +13,10 @@ else:
 
 file=open(nombreArchivo,'r')
 
+lineas = csv.reader(file)
+
+for cheque in lineas:
+      print(cheque)
+
 file.close()
+
