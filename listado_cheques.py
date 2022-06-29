@@ -16,7 +16,13 @@ file=open(nombreArchivo,'r')
 lineas = csv.reader(file)
 
 for cheque in lineas:
-      print(cheque)
+    if cheque[8] ==  dni:
+        print("se encontro el cheque: ", cheque)
+    else:
+        print("no se encontro ningun cheque")
 
 file.close()
+
+
+
 
