@@ -1,36 +1,55 @@
 import csv
 import sys
 
+
+def imprimir():
+    for x in devolucion:
+        print(x)
+
+
 argumentos = sys.argv
 
-if len(argumentos) > 1:
+todoBien = True
+nroCheque = ''
+msjError = ''
+
+devolucion = []
+
+if len(argumentos) == 5:
     nombreArchivo = argumentos[1]
-    dni=argumentos[2]
-    salida=argumentos[3]
-    tipoCheque=argumentos[4]
+    dni = argumentos[2]
+    salida = argumentos[3]
+    tipoCheque = argumentos[4]
 else:
-    dni=''
+    todoBien = False
+    msjError = 'ERROR EN CANTIDAD DE ARGUMENTOS'
 
-file=open(nombreArchivo,'r')
-
-nroCheque=''
-msjError=''
+file = open(nombreArchivo, 'r')
 
 lineas = csv.reader(file)
 
-for cheque in lineas:
-    if cheque[8] ==  dni:
-        if nroCheque=='':
-            nroCheque=cheque[0]
+if todoBien:
+    for cheque in lineas:
+        if cheque[8] == dni:
+            if nroCheque == '':
+                nroCheque = cheque[0]
+            else:
+                if cheque[0] == nroCheque:
+                    msjError = 'El DNI:', dni, 'tiene dos cheques iguales con nro: ', nroCheque
+                    break
+            if cheque[9] == tipoCheque.upper():
+                devolucion.append(cheque)
         else:
-            if cheque[0]==nroCheque:
-                msjError= 'El DNI:', dni, 'tiene dos cheques iguales con nro: ', nroCheque
-                break
-    else:
-        print("No se encontro ningun cheque")
+            print("No se encontro ningun cheque con dni: ", dni)
+
+
+if msjError == '':
+    if salida.lower() == 'pantalla':
+        imprimir()
+    elif salida.lower() == 'csv':
+        print('simulamos devolver un csv')
+else:
+    print(msjError)
+
 
 file.close()
-
-
-
-
