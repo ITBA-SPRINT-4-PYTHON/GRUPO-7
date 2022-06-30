@@ -4,9 +4,16 @@ import time
 from datetime import *
 
 def recorridoLista():
+    nuevaLista = devolucion.copy()
+    listaModi = []
     aDevolver = ''
-    for x in devolucion:
-        aDevolver = aDevolver + ','.join(x) + '\n'
+    for x in nuevaLista:
+        listaModi.append(x[3])
+        listaModi.append(x[5])
+        listaModi.append(x[6])
+        listaModi.append(x[7])
+
+        aDevolver = aDevolver + ','.join(listaModi) + '\n'
     return aDevolver
 
 def imprimir():
@@ -48,6 +55,7 @@ devolucion = []
 #     tipoCheque = argumentos[4]
 
 # está mal pero no tan mal
+
 if len(argumentos) > 4:
     nombreArchivo = argumentos[1]
     dni = argumentos[2]
