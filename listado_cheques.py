@@ -15,6 +15,9 @@ def returnCsv():
         write.writerows(devolucion)
     
     f.close()
+def checkEstado(estado):
+    return estado == 'PENDIENTE' or estado == 'APROBADO' or estado == 'RECHAZADO'
+
 
 
 argumentos = sys.argv
@@ -22,14 +25,29 @@ argumentos = sys.argv
 todoBien = True
 nroCheque = ''
 msjError = ''
+#---------------
+estadoCheque = ''
+rango = ''
 
 devolucion = []
 
-if len(argumentos) == 5:
+# if len(argumentos) == 5:
+#     nombreArchivo = argumentos[1]
+#     dni = argumentos[2]
+#     salida = argumentos[3]
+#     tipoCheque = argumentos[4]
+
+if len(argumentos) > 4:
     nombreArchivo = argumentos[1]
     dni = argumentos[2]
     salida = argumentos[3]
     tipoCheque = argumentos[4]
+    if len(argumentos) > 5 and checkEstado(argumentos[5]):
+        estadoCheque = argumentos[5]
+        if len(argumentos) > 6:
+            rango = argumentos[6]
+    else:
+        rango = argumentos[5]
 else:
     todoBien = False
     msjError = 'ERROR EN CANTIDAD DE ARGUMENTOS'
